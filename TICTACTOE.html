@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            margin: 20px auto;
+            width: 320px;
+        }
+        .cell {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            background: #f0f0f0;
+            cursor: pointer;
+            border: 2px solid #333;
+        }
+        .cell.taken {
+            cursor: not-allowed;
+        }
+        .message {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+        .reset-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tic-Tac-Toe</h1>
+    <div class="board" id="board"></div>
+    <div class="message" id="message"></div>
+    <button class="reset-btn" onclick="resetGame()">Reset Game</button>
+
+    <script>
+        let currentPlayer = '✖️';
+        let gameBoard = ["", "", "", "", "", "", "", "", ""];
+        let gameActive = true;
+
+        const boardElement = document.getElementById("board");
+        const messageElement = document.getElementById("message");
+
+        function createBoard() {
+            boardElement.innerHTML = "";
+            gameBoard.forEach((cell, index) => {
+                const cellElement = document.createElement("div");
+                cellElement.classList.add("cell");
+                cellElement.dataset.index = index;
+                cellElement.textContent = cell;
+                cellElement.addEventListener("click", handleMove);
+                boardElement.appendChild(cellElement);
+            });
+        }
+
+        function handleMove(event) {
+            if (!gameActive) return;
+
+            const index = event.target.dataset.index;
+            if (gameBoard[index] !== "") return;
+
+            gameBoard[index] = currentPlayer;
+            event.target.textContent = currentPlayer;
+            event.target.classList.add("taken");
+
+            if (checkWin()) {
+                messageElement.textContent = `🎉 Player ${currentPlayer} wins!`;
+                gameActive = false;
+                return;
+            }
+
+            if (gameBoard.every(cell => cell !== "")) {
+                messageElement.textContent = "It's a draw! 🤝";
+                gameActive = false;
+                return;
+            }
+
+            currentPlayer = currentPlayer === "✖️" ? "⭕" : "✖️";
+        }
+
+        function checkWin() {
+            const winningCombinations = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+                [0, 4, 8], [2, 4, 6] // Diagonals
+            ];
+
+            return winningCombinations.some(combination => {
+                const [a, b, c] = combination;
+                return gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c];
+            });
+        }
+
+        function resetGame() {
+            gameBoard = ["", "", "", "", "", "", "", "", ""];
+            gameActive = true;
+            currentPlayer = "✖️";
+            messageElement.textContent = "";
+            createBoard();
+        }
+
+        createBoard();
+    </script>
+</body>
+</html>
