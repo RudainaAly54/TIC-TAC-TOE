@@ -39,10 +39,3 @@ https://tictactoerud.netlify.app/
 3. The first to align **3 marks in a row, column, or diagonal** wins.  
 4. If the board is full and no one wins → it’s a **draw**.  
 5. Hit **Restart** to play again.  
-
----
-
-## 📂 Installation & Usage
-1. Clone the repository:
-   ```bash
-  
