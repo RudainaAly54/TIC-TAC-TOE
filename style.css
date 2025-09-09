@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            text-align: center;
+            background: #1a1a2e;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 30px;
+            font-size: 2em;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.7);
+            }
+        }
+
+        .game-container {
+            background: #16213e;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 149, 255, 0.3);
+            border: 2px solid #0f3460;
+            display: none;
+        }
+
+        .entry-page {
+            background: #16213e;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 149, 255, 0.3);
+            border: 2px solid #0f3460;
+            max-width: 500px;
+            margin: 50px auto;
+        }
+
+        .mode-selection {
+            margin: 30px 0;
+        }
+
+        .mode-btn {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 1em;
+            border: 2px solid #0f3460;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #1a1a2e;
+            color: #fff;
+            transition: all 0.3s ease;
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        .mode-btn:hover {
+            background: #0f3460;
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 149, 255, 0.5);
+        }
+
+        .mode-btn.active {
+            background: #0f3460;
+            color: #fff;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 10px;
+            margin: 20px auto;
+            width: 320px;
+            background: #1a1a2e;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #0f3460;
+        }
+
+        .cell {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            background: #16213e;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border: 2px solid #0f3460;
+            color: #fff;
+        }
+
+        .cell:hover {
+            background: #0f3460;
+            color: #fff;
+            transform: scale(0.95);
+            box-shadow: 0 0 15px rgba(0, 149, 255, 0.5);
+        }
+
+        .cell.taken {
+            cursor: not-allowed;
+        }
+
+        .message {
+            font-size: 1.2em;
+            margin: 20px 0;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            min-height: 2em;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 15px;
+            background: #16213e;
+            border-radius: 10px;
+            border: 2px solid #0f3460;
+        }
+
+        .score {
+            padding: 10px 20px;
+            color: #fff;
+        }
+
+        .reset-btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 1em;
+            cursor: pointer;
+            background: #1a1a2e;
+            color: #fff;
+            border: 2px solid #0f3460;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .reset-btn:hover {
+            background: #0f3460;
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 149, 255, 0.5);
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 10;
+            width: 310px;
+            height: 310px;
+            margin: 20px auto;
+        }
+
+        .player-turn {
+            font-size: 1em;
+            color: #fff;
+            margin: 10px 0;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        }
+
+        .win-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(26, 26, 46, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #0f3460;
+            box-shadow: 0 0 30px rgba(0, 149, 255, 0.5);
+            display: none;
+            z-index: 100;
+            animation: messageGlow 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes messageGlow {
+            from {
+                box-shadow: 0 0 20px rgba(0, 149, 255, 0.3);
+            }
+            to {
+                box-shadow: 0 0 40px rgba(0, 149, 255, 0.5);
+            }
+        }
+
+        .win-message h2 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .win-message button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            background: #1a1a2e;
+            color: #fff;
+            border: 2px solid #0f3460;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .win-message button:hover {
+            background: #0f3460;
+            color: #fff;
+            transform: scale(1.05);
+        }
