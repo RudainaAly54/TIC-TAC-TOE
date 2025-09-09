@@ -9,7 +9,6 @@ Play against a friend in the browser and see who can claim victory — X or O.
 - Classic **3x3 Tic Tac Toe board**
 - **Two-player mode** (X vs O)
 - **Win detection** (rows, columns, diagonals)
-- **Draw detection** (no more moves left)
 - **Reset / Replay option**
 - Responsive and beginner-friendly code
 
